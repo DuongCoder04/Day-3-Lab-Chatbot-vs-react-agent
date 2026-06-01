@@ -1,0 +1,322 @@
+[
+  {
+    "building": "Tòa A", "floor": 1, "room": "A101", "capacity": 40, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 1, "room": "A102", "capacity": 40, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": false, "Thursday": false, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 1, "room": "A103", "capacity": 80, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Micro", "Loa"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": false, "Thursday": true, "Friday": true, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 1, "room": "A104", "capacity": 40, "equipment": ["Bảng trắng", "Điều hòa"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": false, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 1, "room": "A105", "capacity": 120, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Micro", "Loa", "Bục giảng"],
+    "availability": {"Monday": false, "Tuesday": false, "Wednesday": false, "Thursday": true, "Friday": false, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 1, "room": "A106", "capacity": 50, "equipment": ["Bảng tương tác", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": true, "Thursday": true, "Friday": true, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 2, "room": "A201", "capacity": 30, "equipment": ["Bảng trắng", "Điều hòa", "Tivi"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": true, "Thursday": false, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 2, "room": "A202", "capacity": 30, "equipment": ["Bảng trắng", "Điều hòa", "Tivi"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": true, "Thursday": true, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 2, "room": "A203", "capacity": 50, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": false, "Thursday": true, "Friday": true, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 2, "room": "A204", "capacity": 50, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": true, "Thursday": false, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 2, "room": "A205", "capacity": 100, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Micro", "Loa"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": false, "Thursday": true, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 2, "room": "A206", "capacity": 45, "equipment": ["Bảng trắng", "Điều hòa"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": false, "Thursday": true, "Friday": true, "Saturday": true, "Sunday": false}
+  },
+  {
+    "building": "Tòa A", "floor": 3, "room": "A301", "capacity": 40, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": false, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 3, "room": "A302", "capacity": 40, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": false, "Thursday": false, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 3, "room": "A303", "capacity": 40, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 3, "room": "A304", "capacity": 60, "equipment": ["Bảng tương tác", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": true, "Thursday": false, "Friday": true, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 3, "room": "A305", "capacity": 60, "equipment": ["Bảng tương tác", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": false, "Thursday": true, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 3, "room": "A306", "capacity": 80, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Micro"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": true, "Thursday": true, "Friday": false, "Saturday": true, "Sunday": false}
+  },
+  {
+    "building": "Tòa A", "floor": 4, "room": "A401", "capacity": 35, "equipment": ["Bảng trắng", "Điều hòa", "Tivi"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 4, "room": "A402", "capacity": 35, "equipment": ["Bảng trắng", "Điều hòa", "Tivi"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": false, "Thursday": true, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 4, "room": "A403", "capacity": 50, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": true, "Thursday": false, "Friday": true, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 4, "room": "A404", "capacity": 50, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": false, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 4, "room": "A405", "capacity": 150, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Micro", "Loa", "Bục giảng"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": false, "Thursday": false, "Friday": false, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 4, "room": "A406", "capacity": 40, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": false, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 5, "room": "A501", "capacity": 40, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": true, "Thursday": true, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 5, "room": "A502", "capacity": 40, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": false, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 5, "room": "A503", "capacity": 40, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": false, "Thursday": false, "Friday": true, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 5, "room": "A504", "capacity": 40, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": false, "Thursday": true, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 5, "room": "A505", "capacity": 80, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Micro"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": true, "Thursday": false, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa A", "floor": 5, "room": "A506", "capacity": 100, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Micro", "Loa"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": true, "Saturday": false, "Sunday": false}
+  },
+  {
+    "building": "Tòa B", "floor": 1, "room": "B101", "capacity": 30, "equipment": ["Bảng trắng", "Quạt trần"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": true, "Thursday": true, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 1, "room": "B102", "capacity": 30, "equipment": ["Bảng trắng", "Quạt trần"],
+    "availability": {"Monday": false, "Tuesday": false, "Wednesday": false, "Thursday": false, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 1, "room": "B103", "capacity": 50, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": false, "Friday": true, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 1, "room": "B104", "capacity": 50, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": false, "Thursday": true, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 1, "room": "B105", "capacity": 100, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Loa", "Micro"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": false, "Thursday": false, "Friday": true, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 1, "room": "B106", "capacity": 40, "equipment": ["Bảng trắng", "Điều hòa", "Tivi"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": true, "Thursday": true, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 2, "room": "B201", "capacity": 40, "equipment": ["Bảng trắng", "Điều hòa"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 2, "room": "B202", "capacity": 40, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": true, "Thursday": false, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 2, "room": "B203", "capacity": 40, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": false, "Tuesday": false, "Wednesday": false, "Thursday": true, "Friday": false, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 2, "room": "B204", "capacity": 60, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Micro"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": false, "Thursday": true, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 2, "room": "B205", "capacity": 60, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Micro"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": false, "Friday": true, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 2, "room": "B206", "capacity": 45, "equipment": ["Bảng trắng", "Quạt trần"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": true, "Thursday": true, "Friday": true, "Saturday": true, "Sunday": false}
+  },
+  {
+    "building": "Tòa B", "floor": 3, "room": "B301", "capacity": 30, "equipment": ["Bảng trắng", "Quạt trần", "Tivi"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": false, "Thursday": true, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 3, "room": "B302", "capacity": 30, "equipment": ["Bảng trắng", "Quạt trần", "Tivi"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": true, "Thursday": false, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 3, "room": "B303", "capacity": 50, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": false, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": false, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 3, "room": "B304", "capacity": 50, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": false, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 3, "room": "B305", "capacity": 80, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Micro", "Loa"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": false, "Thursday": true, "Friday": true, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 3, "room": "B306", "capacity": 100, "equipment": ["Bảng tương tác", "Điều hòa", "Máy chiếu", "Micro"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": true, "Thursday": false, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 4, "room": "B401", "capacity": 40, "equipment": ["Bảng trắng", "Điều hòa"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": true, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 4, "room": "B402", "capacity": 40, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": true, "Thursday": false, "Friday": true, "Saturday": true, "Sunday": false}
+  },
+  {
+    "building": "Tòa B", "floor": 4, "room": "B403", "capacity": 50, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": false, "Thursday": true, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 4, "room": "B404", "capacity": 60, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Micro"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 4, "room": "B405", "capacity": 70, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Micro", "Loa"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": false, "Thursday": false, "Friday": true, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 4, "room": "B406", "capacity": 120, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Micro", "Loa", "Bục giảng"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": true, "Thursday": true, "Friday": false, "Saturday": false, "Sunday": false}
+  },
+  {
+    "building": "Tòa B", "floor": 5, "room": "B501", "capacity": 35, "equipment": ["Bảng trắng", "Điều hòa"],
+    "availability": {"Monday": false, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 5, "room": "B502", "capacity": 35, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": false, "Thursday": true, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 5, "room": "B503", "capacity": 45, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": false, "Friday": true, "Saturday": true, "Sunday": false}
+  },
+  {
+    "building": "Tòa B", "floor": 5, "room": "B504", "capacity": 60, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Micro"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": true, "Thursday": true, "Friday": true, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 5, "room": "B505", "capacity": 80, "equipment": ["Bảng tương tác", "Điều hòa", "Máy chiếu", "Micro", "Loa"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": false, "Thursday": false, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa B", "floor": 5, "room": "B506", "capacity": 80, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Micro"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": false, "Saturday": true, "Sunday": false}
+  },
+  {
+    "building": "Tòa C", "floor": 1, "room": "C101", "capacity": 20, "equipment": ["Bảng trắng", "Điều hòa"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": true, "Thursday": true, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa C", "floor": 1, "room": "C102", "capacity": 20, "equipment": ["Bảng trắng", "Điều hòa"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": false, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa C", "floor": 1, "room": "C103", "capacity": 45, "equipment": ["Bảng tương tác", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": false, "Thursday": true, "Friday": false, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa C", "floor": 1, "room": "C104", "capacity": 45, "equipment": ["Bảng tương tác", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": true, "Thursday": false, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa C", "floor": 1, "room": "C105", "capacity": 100, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Micro", "Loa"],
+    "availability": {"Monday": false, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": false, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa C", "floor": 2, "room": "C201", "capacity": 30, "equipment": ["Bảng trắng", "Điều hòa", "Tivi"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa C", "floor": 2, "room": "C202", "capacity": 30, "equipment": ["Bảng trắng", "Điều hòa", "Tivi"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": false, "Thursday": false, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa C", "floor": 2, "room": "C203", "capacity": 50, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": true, "Thursday": true, "Friday": true, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa C", "floor": 2, "room": "C204", "capacity": 50, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": false, "Thursday": true, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa C", "floor": 2, "room": "C205", "capacity": 200, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Micro", "Loa", "Bục giảng", "Màn hình LED"],
+    "availability": {"Monday": false, "Tuesday": false, "Wednesday": false, "Thursday": false, "Friday": false, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa C", "floor": 3, "room": "C301", "capacity": 25, "equipment": ["Bảng trắng", "Điều hòa"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": true, "Thursday": true, "Friday": true, "Saturday": true, "Sunday": false}
+  },
+  {
+    "building": "Tòa C", "floor": 3, "room": "C302", "capacity": 25, "equipment": ["Bảng trắng", "Điều hòa", "Tivi"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": true, "Thursday": false, "Friday": true, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa C", "floor": 3, "room": "C303", "capacity": 40, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa C", "floor": 3, "room": "C304", "capacity": 40, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": false, "Thursday": true, "Friday": true, "Saturday": true, "Sunday": false}
+  },
+  {
+    "building": "Tòa C", "floor": 3, "room": "C305", "capacity": 60, "equipment": ["Bảng tương tác", "Điều hòa", "Máy chiếu", "Micro"],
+    "availability": {"Monday": false, "Tuesday": false, "Wednesday": true, "Thursday": false, "Friday": true, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa C", "floor": 4, "room": "C401", "capacity": 35, "equipment": ["Bảng trắng", "Điều hòa"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": true, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa C", "floor": 4, "room": "C402", "capacity": 35, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": false, "Thursday": true, "Friday": false, "Saturday": true, "Sunday": true}
+  },
+  {
+    "building": "Tòa C", "floor": 4, "room": "C403", "capacity": 45, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu"],
+    "availability": {"Monday": true, "Tuesday": true, "Wednesday": true, "Thursday": false, "Friday": true, "Saturday": true, "Sunday": false}
+  },
+  {
+    "building": "Tòa C", "floor": 4, "room": "C404", "capacity": 45, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Micro"],
+    "availability": {"Monday": true, "Tuesday": false, "Wednesday": true, "Thursday": true, "Friday": false, "Saturday": false, "Sunday": true}
+  },
+  {
+    "building": "Tòa C", "floor": 4, "room": "C405", "capacity": 150, "equipment": ["Bảng trắng", "Điều hòa", "Máy chiếu", "Micro", "Loa", "Bục giảng"],
+    "availability": {"Monday": false, "Tuesday": true, "Wednesday": true, "Thursday": false, "Friday": true, "Saturday": true, "Sunday": false}
+  }
+]
