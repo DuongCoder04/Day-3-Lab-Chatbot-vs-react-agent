@@ -42,8 +42,10 @@ class LocalProvider(LLMProvider):
 
         response = self.llm(
             full_prompt,
-            max_tokens=1024,
-            stop=["<|end|>", "Observation:"],
+            max_tokens=512,
+            temperature=0.1,       # thấp → ít sáng tạo, ít hallucinate
+            repeat_penalty=1.1,    # tránh lặp lại
+            stop=["<|end|>", "<|user|>", "<|system|>", "Observation:", "User:", "Phần mới:"],
             echo=False
         )
 
@@ -73,8 +75,10 @@ class LocalProvider(LLMProvider):
 
         stream = self.llm(
             full_prompt,
-            max_tokens=1024,
-            stop=["<|end|>", "Observation:"],
+            max_tokens=512,
+            temperature=0.1,
+            repeat_penalty=1.1,
+            stop=["<|end|>", "<|user|>", "<|system|>", "Observation:", "User:", "Phần mới:"],
             stream=True
         )
 
