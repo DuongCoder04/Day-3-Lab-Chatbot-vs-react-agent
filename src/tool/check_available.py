@@ -64,6 +64,3 @@ def check_availability(day_of_week: str, time_slot: str, capacity: int) -> str:
     else:
         return f"Kín lịch: Không có phòng trống nào chứa được {capacity} người vào khung giờ {time_slot} ngày {day_of_week}."
 
-if __name__ == "__main__":
-    # Ví dụ test nhanh
-    print(check_availability("Monday", "08:00-12:00", 90))
