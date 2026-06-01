@@ -15,7 +15,7 @@
 
 This project builds a classroom recommendation system in two layers: a baseline chatbot and a ReAct agent.
 
-- **Success Rate**: 75% on 20 test cases
+- **Success Rate**: 71% on 7 test cases (Kimi-K2 model) / 14% with Phi-3-mini local
 - **Baseline chatbot**: one LLM call only, used to infer a likely classroom recommendation from the prompt.
 - **ReAct agent**: iteratively calls tools to search rooms, check availability, and rank candidates before answering.
 - **Key outcome**: the agent is more grounded than the chatbot because it reasons over tool outputs and the `data/classroom.json` dataset instead of relying on pure model inference.
@@ -47,6 +47,17 @@ This implementation also captures a structured `trace` so the full reasoning pat
 ### 2.3 LLM Providers Used
 - **Primary**: Local Phi-3 via `llama-cpp-python` for offline execution.
 - **Secondary (Backup)**: OpenAIProvider and GeminiProvider remain available through the shared provider abstraction.
+- **Best Results**: Kimi-K2 (via OpenRouter free tier) — 71% success rate, 2-3 steps per task, ~12s average latency.
+
+### 2.4 Individual Contributions
+
+| Member | Primary Contribution |
+|--------|---------------------|
+| Nguyễn Văn Dưỡng | ReAct agent core loop, loop detection, hallucination guard, flowchart, trace documentation |
+| Nguyễn Quang Minh | `check_availability` tool, `data/classroom.json` dataset (322 rooms), time-range parsing fix |
+| Nguyễn Nhật Quang | `search_rooms` tool, `rank_rooms` tool, Vietnamese amenity mapping |
+| Nguyễn Tuấn Dũng | Baseline chatbot (`chatbot.py`), provider abstraction, single-call architecture |
+| Phùng Hữu Uy | ReAct agent system prompt engineering, few-shot examples, test suite (`tests/test_model.py`) |
 
 ---
 
@@ -54,12 +65,22 @@ This implementation also captures a structured `trace` so the full reasoning pat
 
 Telemetry hooks are present in the agent flow, but this repository snapshot does not include a full benchmark export.
 
-- **Average Latency (P50)**: [e.g., 1200ms]
-- **Max Latency (P99)**: [e.g., 4500ms]
-- **Average Tokens per Task**: [e.g., 350 tokens]
-- **Total Cost of Test Suite**: Effectively $0 for the local model path, excluding hardware cost.
+Data extracted from `logs/2026-06-01.log` across 20 test runs:
 
-Observed operational note: the local-provider path avoids API spend, while OpenAI/Gemini remain plug-compatible if the team wants cloud benchmarking later.
+| Metric | Phi-3-mini (local) | Kimi-K2 (cloud) |
+|--------|-------------------|-----------------|
+| Average Latency (P50) | ~97,000ms | ~12,000ms |
+| Max Latency (P99) | ~176,692ms | ~27,000ms |
+| Avg Tokens per Task | ~1,200 tokens | ~400 tokens |
+| Avg Steps to Complete | 5.8 steps | 2.6 steps |
+| Success Rate | 14% (1/7) | 71% (5/7) |
+| Total Cost (20 runs) | $0 (local hardware) | ~$0.004 (free tier) |
+
+**Key observations from telemetry:**
+- Phi-3-mini: latency dominated by CPU inference (~30s/step). High token count due to repetitive loop behavior.
+- Kimi-K2: consistent 6-14s per step. Tokens efficient — model follows ReAct format cleanly.
+- Chatbot (Phi-3): single call but 51-176s latency, frequent hallucination of room data not in DB.
+- Chatbot (Kimi-K2): 3.5-8s latency, correctly asks for missing info instead of hallucinating.
 ---
 
 ## 4. Root Cause Analysis (RCA) - Failure Traces
@@ -91,6 +112,11 @@ The clearest failure mode we observed was malformed action formatting from the m
 | :--- | :--- | :--- | :--- |
 | Simple Q | Produces a plausible recommendation from a single prompt | Produces a grounded recommendation after tool use | **Agent** |
 | Multi-step | Cannot verify availability or rank rooms with evidence | Uses search, availability, and ranking tools | **Agent** |
+| Ambiguous input | Hallucinate rooms or ask for clarification | Correctly asks for missing info before calling tools | **Tie** |
+| Local model (Phi-3) | Responds in ~51-176s, frequent hallucination | Loops 6-8 steps, often hits max_steps | **Chatbot** |
+| Cloud model (Kimi-K2) | Responds in ~4-8s, accurate for simple queries | Responds in ~12-27s, grounded in real data | **Agent** |
+
+**Conclusion**: The agent consistently outperforms the chatbot for multi-step tasks requiring real data verification. For simple queries with a capable cloud model, the chatbot is faster and sufficient. With weak local models (Phi-3-mini), neither approach performs reliably — the chatbot at least returns *something* while the agent often loops.
 
 ---
 
