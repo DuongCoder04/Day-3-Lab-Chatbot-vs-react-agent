@@ -649,7 +649,7 @@
     }
 
     const p = document.createElement('p');
-    p.textContent = text;
+    p.innerHTML = simpleMarkdown(text);
     bubble.appendChild(p);
 
     div.appendChild(avatar);
@@ -707,6 +707,14 @@
 
   function escapeHtml(s) {
     return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function simpleMarkdown(text) {
+    return escapeHtml(text)
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')   // **bold**
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')               // *italic*
+      .replace(/^- (.+)$/gm, '• $1')                      // - list item
+      .replace(/\n/g, '<br>');                             // newlines
   }
 </script>
 </body>

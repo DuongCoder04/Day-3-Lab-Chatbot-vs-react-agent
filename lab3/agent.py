@@ -25,20 +25,28 @@ load_dotenv()
 # System prompt
 # ---------------------------------------------------------------------------
 
-SYSTEM_PROMPT = """Bạn là agent đặt phòng học. Trả lời ngắn gọn bằng tiếng Việt.
+SYSTEM_PROMPT = """Bạn là agent đặt phòng học. Trả lời bằng tiếng Việt.
 
-Tools:
-- search_rooms(capacity, amenities) → tìm phòng
-- check_availability(room_id, time_slot) → kiểm tra trống (time_slot: "Mon 09:00")
-- rank_rooms(rooms, criteria) → xếp hạng
+QUAN TRỌNG: Bạn KHÔNG được tự bịa tên phòng. Bạn PHẢI gọi tool để lấy dữ liệu thật.
 
-Quy tắc: KHÔNG bịa dữ liệu. Chỉ dùng kết quả từ tool. Luôn check availability trước khi đề xuất.
+Tools có sẵn:
+- search_rooms(capacity, amenities) → tìm phòng theo sức chứa và tiện ích
+  amenities hợp lệ: "projector", "whiteboard", "ac", "lab", "mic", "recording"
+- check_availability(room_id, time_slot) → kiểm tra phòng còn trống không (time_slot format: "Mon 09:00", "Wed 14:00")
+- rank_rooms(rooms, criteria) → xếp hạng phòng
 
-Định dạng bắt buộc:
-Thought: <suy luận>
+Quy trình BẮT BUỘC (không được bỏ qua):
+1. Gọi search_rooms để tìm phòng
+2. Gọi check_availability cho từng phòng
+3. Đưa ra Final Answer dựa trên kết quả tool
+
+Định dạng BẮT BUỘC - mỗi lượt chỉ sinh 1 Thought + 1 Action, KHÔNG sinh Final Answer trước khi có Observation:
+
+Thought: <suy luận ngắn gọn>
 Action: <tool_name>(<args>)
-Observation: <do hệ thống điền>
-Final Answer: <trả lời người dùng>"""
+
+Sau khi nhận Observation, tiếp tục với Thought/Action tiếp theo hoặc Final Answer.
+Final Answer: <câu trả lời dựa trên dữ liệu từ tool>"""
 
 # ---------------------------------------------------------------------------
 # ReAct Agent
@@ -75,7 +83,7 @@ class ClassroomReActAgent:
         steps = 0
         last_action = None        # phát hiện lặp
         repeat_count = 0          # đếm số lần lặp cùng action
-        tool_results = {}         # lưu kết quả tool để inject hint
+        tool_results = {}         # lưu kết quả tool: {"search_rooms": ..., "check_availability": {room_id: result, ...}}
 
         while steps < self.max_steps:
             steps += 1
@@ -118,11 +126,48 @@ class ClassroomReActAgent:
             # 2. Kiểm tra Final Answer
             final = self._parse_final_answer(llm_output)
             if final:
-                # Post-process: nếu vô nghĩa thì tự tổng hợp từ tool_results
+                # Chưa gọi tool nào → inject forced search_rooms và tiếp tục
+                if not tool_results:
+                    self._emit("[Guard] Final Answer quá sớm, chưa gọi tool. Buộc search_rooms...")
+                    # Lấy capacity từ user input
+                    cap_match = re.search(r'\d+', user_input)
+                    capacity = cap_match.group() if cap_match else "30"
+                    forced_obs = self._execute_tool("search_rooms", capacity)
+                    tool_results["search_rooms"] = {"args": capacity, "result": forced_obs}
+                    conversation += (
+                        f"\n[Hệ thống: Bạn PHẢI dùng tool. Kết quả search_rooms({capacity}) = {forced_obs}]\n"
+                        f"Thought: Đã có danh sách phòng từ tool, cần kiểm tra availability.\n"
+                    )
+                    self._emit(f"Observation (forced): {forced_obs}")
+                    continue
+
+                # Đã search nhưng chưa check availability → tự động check
+                if "search_rooms" in tool_results and "check_availability" not in tool_results:
+                    rooms_result = tool_results["search_rooms"]["result"]
+                    room_match = re.search(r'\b([A-Z]\d{3})\b', rooms_result)
+                    if room_match:
+                        first_room = room_match.group(1)
+                        # Lấy time slot từ user input
+                        time_match = re.search(
+                            r'(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s+\d{2}:\d{2}', user_input, re.IGNORECASE
+                        )
+                        time_slot = time_match.group() if time_match else "Mon 09:00"
+                        self._emit(f"[Guard] Chưa check availability, tự động check {first_room}...")
+                        forced_obs = self._execute_tool("check_availability", f'"{first_room}", "{time_slot}"')
+                        tool_results["check_availability"] = {"args": f'"{first_room}", "{time_slot}"', "result": forced_obs}
+                        conversation += f"\nObservation (auto): {forced_obs}\n"
+                        self._emit(f"Observation (auto): {forced_obs}")
+                        continue
+
+                # Post-process: nếu hallucinate thì tự tổng hợp
                 cleaned = self._clean_final_answer(final)
                 if cleaned is None:
+                    self._emit("[Guard] Phát hiện hallucination, tổng hợp từ tool data...")
                     cleaned = self._synthesize_answer(tool_results)
-                logger.log_event("AGENT_END", {"steps": steps, "result": cleaned})
+                logger.log_event("AGENT_END", {
+                    "steps": steps,
+                    "result": cleaned
+                })
                 return cleaned
 
             # 3. Parse Action
@@ -162,10 +207,19 @@ class ClassroomReActAgent:
             observation = self._execute_tool(tool_name, tool_args_str)
 
             # Lưu kết quả để dùng ở bước sau
-            tool_results[tool_name] = {
-                "args": tool_args_str,
-                "result": observation
-            }
+            if tool_name == "check_availability":
+                # Lưu từng phòng riêng để không ghi đè
+                if "check_availability" not in tool_results:
+                    tool_results["check_availability"] = {}
+                room_key = tool_args_str.strip('"').split('"')[0] if '"' in tool_args_str else tool_args_str
+                tool_results["check_availability"][room_key] = observation
+                # Cũng lưu result mới nhất để _build_hint dùng
+                tool_results["check_availability"]["_last"] = observation
+            else:
+                tool_results[tool_name] = {
+                    "args": tool_args_str,
+                    "result": observation
+                }
 
             obs_line = f"Observation: {observation}\n"
             conversation += obs_line
@@ -200,7 +254,7 @@ class ClassroomReActAgent:
 
         # Đã check_availability → nhắc đưa ra Final Answer
         elif "check_availability" in tool_results:
-            avail_result = tool_results["check_availability"]["result"]
+            avail_result = tool_results["check_availability"].get("_last", "")
             hints.append(
                 f"Đã kiểm tra: {avail_result}. "
                 f"Bước TIẾP THEO: đưa ra Final Answer cho người dùng."
@@ -251,13 +305,26 @@ class ClassroomReActAgent:
     def _clean_final_answer(self, text: str) -> str:
         """
         Hậu xử lý Final Answer:
-        - Nếu text có nghĩa → giữ nguyên
-        - Nếu quá ngắn hoặc vô nghĩa → tự tổng hợp từ tool_results
+        - Nếu chứa phòng không có trong DB → coi là hallucination, trả None
+        - Nếu quá ngắn hoặc không có tên phòng → trả None
+        - Caller sẽ tự tổng hợp từ tool_results
         """
-        # Nếu quá ngắn hoặc không chứa tên phòng → coi là vô nghĩa
-        has_room = bool(re.search(r'\b[A-Z]\d{3}\b', text))
-        if len(text) < 20 or not has_room:
-            return None  # caller sẽ tự tổng hợp
+        from lab3.tools import ROOMS_DB
+        valid_ids = {r["id"] for r in ROOMS_DB}
+
+        # Tìm tất cả mã phòng trong text (dạng A101, B205...)
+        mentioned = set(re.findall(r'\b([A-Z]\d{3})\b', text))
+
+        # Nếu có phòng bịa (không trong DB) → hallucination
+        if mentioned and not mentioned.issubset(valid_ids):
+            fake = mentioned - valid_ids
+            logger.log_event("AGENT_HALLUCINATION", {"fake_rooms": list(fake), "text": text[:100]})
+            return None
+
+        # Nếu không có tên phòng nào và text ngắn → vô nghĩa
+        if not mentioned and len(text) < 30:
+            return None
+
         return text
 
     # ------------------------------------------------------------------
@@ -375,15 +442,45 @@ class ClassroomReActAgent:
     def _parse_search_rooms_args(self, args_str: str):
         """Parse 'capacity, [amenities]' hoặc 'capacity'"""
         import ast
+
+        # Mapping tiếng Việt → tiếng Anh cho amenities
+        AMENITY_MAP = {
+            "lab máy tính": "lab", "lab": "lab", "máy tính": "lab",
+            "computer lab": "lab", "phòng máy": "lab",
+            "máy chiếu": "projector", "projector": "projector", "chiếu": "projector",
+            "bảng trắng": "whiteboard", "whiteboard": "whiteboard", "bảng": "whiteboard",
+            "điều hòa": "ac", "ac": "ac", "air conditioning": "ac", "điều hoà": "ac",
+            "micro": "mic", "mic": "mic", "microphone": "mic",
+            "quay phim": "recording", "recording": "recording", "thu hình": "recording",
+        }
+
         parts = args_str.split(",", 1)
-        capacity = int(re.search(r"\d+", parts[0]).group())
+        capacity_str = parts[0].strip()
+        num = re.search(r"\d+", capacity_str)
+        capacity = int(num.group()) if num else 30
+
         amenities = []
         if len(parts) > 1:
             try:
-                amenities = ast.literal_eval(parts[1].strip())
+                raw_list = ast.literal_eval(parts[1].strip())
+                if isinstance(raw_list, list):
+                    for item in raw_list:
+                        item_lower = str(item).lower().strip()
+                        mapped = AMENITY_MAP.get(item_lower)
+                        if mapped:
+                            amenities.append(mapped)
+                        else:
+                            # Thử partial match
+                            for vn_key, en_val in AMENITY_MAP.items():
+                                if vn_key in item_lower or item_lower in vn_key:
+                                    amenities.append(en_val)
+                                    break
+                            else:
+                                amenities.append(item_lower)  # giữ nguyên nếu không map được
             except Exception:
                 amenities = []
-        return capacity, amenities
+
+        return capacity, list(dict.fromkeys(amenities))  # dedup
 
     def _parse_check_availability_args(self, args_str: str):
         """Parse '"A301", "Mon 09:00"' → ('A301', 'Mon 09:00')"""

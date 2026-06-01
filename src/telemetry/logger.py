@@ -67,9 +67,9 @@ class PrettyConsoleFormatter(logging.Formatter):
             if key not in data:
                 continue
             value = data[key]
-            # Cắt output dài
-            if isinstance(value, str) and len(value) > 200:
-                value = value[:200] + "..."
+            # Cắt output dài — chỉ cắt trong console, file log giữ nguyên
+            if isinstance(value, str) and len(value) > 300:
+                value = value[:300] + "..."
             lines.append(f"  {_BOLD}{key}{_RESET}: {value}")
 
         # Các field còn lại (mờ hơn)
